@@ -344,7 +344,11 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -420,6 +424,23 @@
             "lineageTag": "12d79cdb-e32c-44ae-b3db-46e9b2579039",
             "sourceColumn": "Discount",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "TotalDiscount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "3daa4a3e-8b9a-457e-beab-ee1d54a6170f",
+            "sourceColumn": "TotalDiscount",
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "f450b277-0e44-4cac-91b6-bbad4b61111a",
@@ -433,9 +454,11 @@
                 "    Source = Excel.Workbook(Web.Contents(\"https://nwuac.sharepoint.com/sites/CMPG323/Shared%20Documents/CMPG323%20EcoPower%20Logistics%20Data.xlsx\"), null, true),",
                 "    #\"Order Details_Sheet\" = Source{[Item=\"Order Details\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Order Details_Sheet\", [PromoteAllScalars=true]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderDetailsID\", Int64.Type}, {\"OrderId\", Int64.Type}, {\"ProductId\", Int64.Type}, {\"Quantity\", Int64.Type}, {\"Discount\", type number}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderDetailsID\", Int64.Type}, {\"OrderId\", Int64.Type}, {\"ProductId\", Int64.Type}, {\"Quantity\", Int64.Type}, {\"Discount\", type number}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type\", \"TotalDiscount\", each [Quantity] * [Discount]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"TotalDiscount\", type number}})",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Changed Type1\""
               ],
               "type": "m"
             }
