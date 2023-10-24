@@ -345,6 +345,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -420,6 +424,19 @@
             "lineageTag": "8e18e811-c027-4466-9f09-5ee58062689d",
             "sourceColumn": "Discount",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "TotalDiscount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d7cf419d-5df1-4db8-9723-ef3a37acffbc",
+            "sourceColumn": "TotalDiscount",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "7dc3297c-bf37-46b5-a842-41946d0dc67e",
@@ -433,9 +450,10 @@
                 "    Source = Excel.Workbook(File.Contents(\"C:\\Users\\Makunyane\\Downloads\\CMPG323 EcoPower Logistics Data.xlsx\"), null, true),",
                 "    #\"Order Details_Sheet\" = Source{[Item=\"Order Details\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Order Details_Sheet\", [PromoteAllScalars=true]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderDetailsID\", Int64.Type}, {\"OrderId\", Int64.Type}, {\"ProductId\", Int64.Type}, {\"Quantity\", Int64.Type}, {\"Discount\", type number}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderDetailsID\", Int64.Type}, {\"OrderId\", Int64.Type}, {\"ProductId\", Int64.Type}, {\"Quantity\", Int64.Type}, {\"Discount\", type number}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Changed Type\", \"TotalDiscount\", each [Quantity] * [Discount])",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Added Custom\""
               ],
               "type": "m"
             }
