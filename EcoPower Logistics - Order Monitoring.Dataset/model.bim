@@ -269,14 +269,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "845dd56a-58fa-4896-a97a-48bf9a56f20c",
             "sourceColumn": "CustomerId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "CustomerTitle",
@@ -357,14 +357,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "1721c4ea-94d1-4743-886b-e7ec75c146d0",
             "sourceColumn": "OrderId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "OrderDate",
@@ -400,14 +400,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "d8c5bacb-23e2-43ae-b729-63f212a6c435",
             "sourceColumn": "CustomerId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "DeliveryAddress",
@@ -427,14 +427,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "5b861bd4-26fd-41a9-85c0-919d6c13e4bd",
             "sourceColumn": "DeliveryId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "41da2732-930a-46b3-8e1b-d6542a3d5ac3",
@@ -479,42 +479,42 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "74c4464b-44ea-4188-ba38-78378185b4b1",
             "sourceColumn": "OrderDetailsId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "OrderId",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "c02e64a5-3576-4a1f-8a0c-97816e43a746",
             "sourceColumn": "OrderId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "ProductId",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "c5f16f27-12a3-4893-ad3e-3f75c8c65deb",
             "sourceColumn": "ProductId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "Quantity",
@@ -546,6 +546,25 @@
             "lineageTag": "92559bb8-6900-4ffa-ba7d-337475de5927",
             "sourceColumn": "Discount",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "TotalDiscount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "expression": "'Order Details'[Quantity] * 'Order Details'[Discount] ",
+            "isDataTypeInferred": true,
+            "lineageTag": "c3c2f93a-188a-4a81-8b09-8347c56a31ed",
+            "summarizeBy": "sum",
+            "type": "calculated"
           }
         ],
         "lineageTag": "8d64eaaf-11e4-4624-aa33-32668eabfaa2",
@@ -587,14 +606,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "b743fbfd-13a6-41c1-9ae6-4ccc69249ad9",
             "sourceColumn": "ProductId",
-            "summarizeBy": "count"
+            "summarizeBy": "none"
           },
           {
             "name": "ProductName",
