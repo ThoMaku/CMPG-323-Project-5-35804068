@@ -334,7 +334,11 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -393,7 +397,7 @@
             "summarizeBy": "none"
           },
           {
-            "name": "Column5",
+            "name": "DeliveryId",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -403,7 +407,7 @@
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "5b861bd4-26fd-41a9-85c0-919d6c13e4bd",
-            "sourceColumn": "Column5",
+            "sourceColumn": "DeliveryId",
             "summarizeBy": "sum"
           }
         ],
@@ -418,9 +422,12 @@
                 "    Source = Excel.Workbook(Web.Contents(\"https://nwuac-my.sharepoint.com/personal/35804068_mynwu_ac_za/Documents/CMPG323_Project5/CMPG323%20EcoPower%20Logistics%20Data.xlsx\"), null, true),",
                 "    Orders_Sheet = Source{[Item=\"Orders\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(Orders_Sheet, [PromoteAllScalars=true]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderId\", Int64.Type}, {\"OrderDate\", type any}, {\"CustomerId\", Int64.Type}, {\"DeliveryAddress\", type text}, {\"Column5\", Int64.Type}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderId\", Int64.Type}, {\"OrderDate\", type any}, {\"CustomerId\", Int64.Type}, {\"DeliveryAddress\", type text}, {\"Column5\", Int64.Type}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Column5\", \"DeliveryId\"}}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Renamed Columns\",\"10/06/20923\",#date(2023, 6, 10),Replacer.ReplaceValue,{\"OrderDate\"}),",
+                "    #\"Removed Alternate Rows\" = Table.AlternateRows(#\"Replaced Value\",3,2,14)",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Removed Alternate Rows\""
               ],
               "type": "m"
             }
@@ -432,12 +439,16 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
           {
-            "name": "OrderDetailsID",
+            "name": "OrderDetailsId",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -447,7 +458,7 @@
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "74c4464b-44ea-4188-ba38-78378185b4b1",
-            "sourceColumn": "OrderDetailsID",
+            "sourceColumn": "OrderDetailsId",
             "summarizeBy": "count"
           },
           {
@@ -521,9 +532,10 @@
                 "    Source = Excel.Workbook(Web.Contents(\"https://nwuac-my.sharepoint.com/personal/35804068_mynwu_ac_za/Documents/CMPG323_Project5/CMPG323%20EcoPower%20Logistics%20Data.xlsx\"), null, true),",
                 "    #\"Order Details_Sheet\" = Source{[Item=\"Order Details\",Kind=\"Sheet\"]}[Data],",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Order Details_Sheet\", [PromoteAllScalars=true]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderDetailsID\", Int64.Type}, {\"OrderId\", Int64.Type}, {\"ProductId\", Int64.Type}, {\"Quantity\", Int64.Type}, {\"Discount\", type number}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"OrderDetailsID\", Int64.Type}, {\"OrderId\", Int64.Type}, {\"ProductId\", Int64.Type}, {\"Quantity\", Int64.Type}, {\"Discount\", type number}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"OrderDetailsID\", \"OrderDetailsId\"}})",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Renamed Columns\""
               ],
               "type": "m"
             }
@@ -535,12 +547,16 @@
         "annotations": [
           {
             "name": "PBI_ResultType",
-            "value": "Exception"
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
           {
-            "name": "Column1",
+            "name": "ProductId",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -549,11 +565,11 @@
             ],
             "dataType": "string",
             "lineageTag": "b743fbfd-13a6-41c1-9ae6-4ccc69249ad9",
-            "sourceColumn": "Column1",
+            "sourceColumn": "ProductId",
             "summarizeBy": "none"
           },
           {
-            "name": "Column2",
+            "name": "ProductName",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -562,11 +578,11 @@
             ],
             "dataType": "string",
             "lineageTag": "fcfeb8d3-e95e-48a6-bc8e-d1a4428d8cc6",
-            "sourceColumn": "Column2",
+            "sourceColumn": "ProductName",
             "summarizeBy": "none"
           },
           {
-            "name": "Column3",
+            "name": "Category",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -575,11 +591,11 @@
             ],
             "dataType": "string",
             "lineageTag": "d314e6b9-b4e5-47a1-b902-2c80c978000f",
-            "sourceColumn": "Column3",
+            "sourceColumn": "Category",
             "summarizeBy": "none"
           },
           {
-            "name": "Column4",
+            "name": "UnitsInStock",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -588,7 +604,7 @@
             ],
             "dataType": "string",
             "lineageTag": "84943bee-2239-4c30-a340-b0c84f56a0ed",
-            "sourceColumn": "Column4",
+            "sourceColumn": "UnitsInStock",
             "summarizeBy": "none"
           }
         ],
@@ -602,9 +618,13 @@
                 "let",
                 "    Source = Excel.Workbook(Web.Contents(\"https://nwuac-my.sharepoint.com/personal/35804068_mynwu_ac_za/Documents/CMPG323_Project5/CMPG323%20EcoPower%20Logistics%20Data.xlsx\"), null, true),",
                 "    Products_Sheet = Source{[Item=\"Products\",Kind=\"Sheet\"]}[Data],",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(Products_Sheet,{{\"Column1\", type any}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type any}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Products_Sheet,{{\"Column1\", type any}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type any}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Column1\", \"ProductId\"}, {\"Column2\", \"ProductName\"}, {\"Column3\", \"Category\"}, {\"Column4\", \"UnitsInStock\"}}),",
+                "    #\"Removed Blank Rows\" = Table.SelectRows(#\"Renamed Columns\", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null}))),",
+                "    #\"Removed Top Rows\" = Table.Skip(#\"Removed Blank Rows\",1),",
+                "    #\"Removed Alternate Rows\" = Table.AlternateRows(#\"Removed Top Rows\",16,1,39)",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Removed Alternate Rows\""
               ],
               "type": "m"
             }
