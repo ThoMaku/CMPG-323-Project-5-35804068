@@ -1,6 +1,6 @@
 {
-  "config": "{\"version\":\"5.47\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU08\",\"version\":\"5.48\",\"type\":2}},\"activeSectionIndex\":3,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
-  "filters": "[{\"name\":\"Filter9382c9026cce042232c3\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"Category\"}},\"type\":\"Categorical\",\"howCreated\":1},{\"name\":\"Filter38bca22e2c39ce8317de\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Order Details\"}},\"Property\":\"Quantity\"}},\"type\":\"Advanced\",\"howCreated\":1},{\"name\":\"Filter1b170f46184bb1118e3e\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Customers\"}},\"Property\":\"CustomerTitle\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
+  "config": "{\"version\":\"5.47\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU08\",\"version\":\"5.48\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "filters": "[{\"name\":\"Filter9382c9026cce042232c3\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"Category\"}},\"type\":\"Categorical\",\"howCreated\":1},{\"name\":\"Filter38bca22e2c39ce8317de\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Order Details\"}},\"Property\":\"Quantity\"}},\"type\":\"Advanced\",\"howCreated\":1},{\"name\":\"Filter1b170f46184bb1118e3e\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Customers\"}},\"Property\":\"CustomerTitle\"}},\"type\":\"Categorical\",\"howCreated\":1},{\"name\":\"Filteraf6100078bb9dc29abd7\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Orders\"}},\"Property\":\"OrderId\"}},\"type\":\"Categorical\",\"howCreated\":1},{\"name\":\"Filterb90e06335561adfbdbd0\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Customers\"}},\"Property\":\"CustomerId\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
   "layoutOptimization": 0,
   "resourcePackages": [
     {
@@ -23,7 +23,7 @@
       "config": "{\"objects\":{}}",
       "displayName": "High-Level Metrics",
       "displayOption": 1,
-      "filters": "[{\"name\":\"Filter945dec232362b99c9c17\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"Category\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "filters": "[{\"name\":\"Filter945dec232362b99c9c17\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"Category\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}},{\"name\":\"Filter56fb808fe5e1b61088d0\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Orders\"}},\"Property\":\"State\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
       "height": 720.00,
       "name": "ReportSection",
       "visualContainers": [
@@ -70,7 +70,7 @@
       "config": "{}",
       "displayName": "Order Monitoring",
       "displayOption": 1,
-      "filters": "[]",
+      "filters": "[{\"name\":\"Filterdb5ff1c81299370b8267\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Orders\"}},\"Property\":\"OrderId\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
       "height": 800.00,
       "name": "ReportSection10ab1cb583037b232b4f",
       "ordinal": 1,
@@ -109,7 +109,7 @@
       "config": "{}",
       "displayName": "Customer Monitoring",
       "displayOption": 1,
-      "filters": "[]",
+      "filters": "[{\"name\":\"Filter3612547185bdd2b5828c\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Customers\"}},\"Property\":\"CustomerTitle\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
       "height": 800.00,
       "name": "ReportSectiona8f4290b7e3fe826bf7a",
       "ordinal": 3,
@@ -139,7 +139,7 @@
       "config": "{}",
       "displayName": "Product Monitoring",
       "displayOption": 1,
-      "filters": "[]",
+      "filters": "[{\"name\":\"Filter9b23d7ae75054de1b915\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"Category\"}},\"type\":\"Categorical\",\"howCreated\":1},{\"name\":\"Filterd5a3640089302ea7fe16\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"ProductName\"}},\"type\":\"Categorical\",\"howCreated\":1},{\"name\":\"Filter4b61905414461d766eaa\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Products\"}},\"Property\":\"ProductId\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
       "height": 720.00,
       "name": "ReportSectioncaef096c47d4ff420680",
       "ordinal": 2,
