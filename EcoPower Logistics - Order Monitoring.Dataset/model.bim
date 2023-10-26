@@ -46,6 +46,28 @@
         "joinOnDateBehavior": "datePartOnly",
         "toColumn": "Date",
         "toTable": "LocalDateTable_207f1d4c-8537-43f7-a3fe-6cbbced5515d"
+      },
+      {
+        "name": "1cdc17a2-001a-45fa-b5ee-7bff0a95db65",
+        "fromColumn": "OrderId",
+        "fromTable": "Order Details",
+        "toColumn": "OrderId",
+        "toTable": "Orders"
+      },
+      {
+        "name": "cef30d79-f374-4652-b3de-9f190d4520cb",
+        "fromColumn": "ProductId",
+        "fromTable": "Order Details",
+        "toColumn": "ProductId",
+        "toTable": "Products"
+      },
+      {
+        "name": "d8ac9c82-1a52-4091-95a9-50d1cb305f1a",
+        "fromColumn": "CustomerId",
+        "fromTable": "Orders",
+        "toCardinality": "many",
+        "toColumn": "CustomerId",
+        "toTable": "Customers"
       }
     ],
     "sourceQueryCulture": "en-ZA",
@@ -452,9 +474,12 @@
                 "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Column5\", \"DeliveryId\"}}),",
                 "    #\"Replaced Value\" = Table.ReplaceValue(#\"Renamed Columns\",\"10/06/20923\",#date(2023, 6, 10),Replacer.ReplaceValue,{\"OrderDate\"}),",
                 "    #\"Removed Alternate Rows\" = Table.AlternateRows(#\"Replaced Value\",3,2,14),",
-                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Removed Alternate Rows\",{{\"OrderDate\", type date}})",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Removed Alternate Rows\",{{\"OrderDate\", type date}}),",
+                "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Changed Type1\",\"San Francisco California United States 94122\",\"San Francisco, California, United States, 94122\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
+                "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Replaced Value1\",\"Mesa Arizona United States 85204\",\"Mesa, Arizona, United States, 85204\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
+                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Replaced Value2\",\"Camarillo California United States 93010\",\"Camarillo, California, United States, 93010\",Replacer.ReplaceText,{\"DeliveryAddress\"})",
                 "in",
-                "    #\"Changed Type1\""
+                "    #\"Replaced Value3\""
               ],
               "type": "m"
             }
@@ -521,14 +546,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "a606521c-313b-473f-8560-162966281bc0",
             "sourceColumn": "Quantity",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           },
           {
             "name": "Discount",
@@ -568,6 +593,32 @@
           }
         ],
         "lineageTag": "8d64eaaf-11e4-4624-aa33-32668eabfaa2",
+        "measures": [
+          {
+            "name": "Count of UnitsInStock minus Count of Quantity",
+            "changedProperties": [
+              {
+                "property": "FormatString"
+              }
+            ],
+            "expression": [
+              "",
+              "COUNTA('Products'[UnitsInStock]) - COUNTA('Order Details'[Quantity])"
+            ],
+            "extendedProperties": [
+              {
+                "name": "MeasureTemplate",
+                "type": "json",
+                "value": {
+                  "daxTemplateName": "MathematicalSubtraction",
+                  "version": 0
+                }
+              }
+            ],
+            "formatString": "0",
+            "lineageTag": "000c2de9-2558-4338-8294-dce77cc8a844"
+          }
+        ],
         "partitions": [
           {
             "name": "Order Details",
@@ -646,14 +697,14 @@
             "annotations": [
               {
                 "name": "SummarizationSetBy",
-                "value": "Automatic"
+                "value": "User"
               }
             ],
             "dataType": "int64",
             "formatString": "0",
             "lineageTag": "84943bee-2239-4c30-a340-b0c84f56a0ed",
             "sourceColumn": "UnitsInStock",
-            "summarizeBy": "sum"
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "0ac7fd34-7440-49a6-a527-ffac0e21887e",
