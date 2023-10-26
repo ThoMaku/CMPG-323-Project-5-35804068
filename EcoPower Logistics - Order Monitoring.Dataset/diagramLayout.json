@@ -23,8 +23,8 @@
         },
         {
           "location": {
-            "x": 284,
-            "y": 0
+            "x": 247,
+            "y": 200
           },
           "nodeIndex": "Order Details",
           "nodeLineageTag": "8d64eaaf-11e4-4624-aa33-32668eabfaa2",
