@@ -283,6 +283,10 @@
           {
             "name": "PBI_ResultType",
             "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
           }
         ],
         "columns": [
@@ -457,6 +461,58 @@
             "lineageTag": "5b861bd4-26fd-41a9-85c0-919d6c13e4bd",
             "sourceColumn": "DeliveryId",
             "summarizeBy": "none"
+          },
+          {
+            "name": "City/Street",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bfb3474b-2789-49e9-a551-597a4543ba4f",
+            "sourceColumn": "City/Street",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "State",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ecd34603-fd97-40f7-a15b-db17a88d6837",
+            "sourceColumn": "State",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Country",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b929cb87-86ae-4cdf-aba9-9d877abd009c",
+            "sourceColumn": "Country",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PostalCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "61e62e3c-3271-497d-b502-eb109d54aab3",
+            "sourceColumn": "PostalCode",
+            "summarizeBy": "none"
           }
         ],
         "lineageTag": "41da2732-930a-46b3-8e1b-d6542a3d5ac3",
@@ -477,9 +533,83 @@
                 "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Removed Alternate Rows\",{{\"OrderDate\", type date}}),",
                 "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Changed Type1\",\"San Francisco California United States 94122\",\"San Francisco, California, United States, 94122\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
                 "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Replaced Value1\",\"Mesa Arizona United States 85204\",\"Mesa, Arizona, United States, 85204\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
-                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Replaced Value2\",\"Camarillo California United States 93010\",\"Camarillo, California, United States, 93010\",Replacer.ReplaceText,{\"DeliveryAddress\"})",
+                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Replaced Value2\",\"Camarillo California United States 93010\",\"Camarillo, California, United States, 93010\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Replaced Value3\", \"OrderId\", \"OrderId - Copy\"),",
+                "    #\"Reordered Columns\" = Table.ReorderColumns(#\"Duplicated Column\",{\"OrderId\", \"OrderDate\", \"CustomerId\", \"DeliveryAddress\", \"OrderId - Copy\", \"DeliveryId\"}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Reordered Columns\",{{\"OrderId - Copy\", type text}}),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Changed Type2\",{{\"OrderId - Copy\", \"City/Street\"}}),",
+                "    #\"Duplicated Column1\" = Table.DuplicateColumn(#\"Renamed Columns1\", \"City/Street\", \"City/Street - Copy\"),",
+                "    #\"Reordered Columns1\" = Table.ReorderColumns(#\"Duplicated Column1\",{\"OrderId\", \"OrderDate\", \"CustomerId\", \"DeliveryAddress\", \"City/Street\", \"City/Street - Copy\", \"DeliveryId\"}),",
+                "    #\"Duplicated Column2\" = Table.DuplicateColumn(#\"Reordered Columns1\", \"City/Street - Copy\", \"City/Street - Copy - Copy\"),",
+                "    #\"Reordered Columns2\" = Table.ReorderColumns(#\"Duplicated Column2\",{\"OrderId\", \"OrderDate\", \"CustomerId\", \"DeliveryAddress\", \"City/Street\", \"City/Street - Copy\", \"City/Street - Copy - Copy\", \"DeliveryId\"}),",
+                "    #\"Duplicated Column3\" = Table.DuplicateColumn(#\"Reordered Columns2\", \"City/Street - Copy - Copy\", \"City/Street - Copy - Copy - Copy\"),",
+                "    #\"Reordered Columns3\" = Table.ReorderColumns(#\"Duplicated Column3\",{\"OrderId\", \"OrderDate\", \"CustomerId\", \"DeliveryAddress\", \"City/Street\", \"City/Street - Copy\", \"City/Street - Copy - Copy\", \"City/Street - Copy - Copy - Copy\", \"DeliveryId\"}),",
+                "    #\"Replaced Value4\" = Table.ReplaceValue(#\"Reordered Columns3\",\"100041\",\"4 Steve Biko Street\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value5\" = Table.ReplaceValue(#\"Replaced Value4\",\"100090\",\"Sann Francisco\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value6\" = Table.ReplaceValue(#\"Replaced Value5\",\"Sann Francisco\",\"San Francisco\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value7\" = Table.ReplaceValue(#\"Replaced Value6\",\"100216\",\"Mesa\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value8\" = Table.ReplaceValue(#\"Replaced Value7\",\"100146\",\"Camarillo\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value9\" = Table.ReplaceValue(#\"Replaced Value8\",\"100069\",\"Omaha\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Renamed Columns2\" = Table.RenameColumns(#\"Replaced Value9\",{{\"City/Street - Copy\", \"State\"}}),",
+                "    #\"Replaced Value10\" = Table.ReplaceValue(#\"Renamed Columns2\",\"100041\",\"Potchefstroom\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value11\" = Table.ReplaceValue(#\"Replaced Value10\",\"100090\",\"Carlifonia\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value12\" = Table.ReplaceValue(#\"Replaced Value11\",\"Carlifonia\",\"California\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value13\" = Table.ReplaceValue(#\"Replaced Value12\",\"100216\",\"Arizona\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value14\" = Table.ReplaceValue(#\"Replaced Value13\",\"100146\",\"California\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value15\" = Table.ReplaceValue(#\"Replaced Value14\",\"100069\",\"Nebraska\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value16\" = Table.ReplaceValue(#\"Replaced Value15\",\"100041\",\"South Africa\",Replacer.ReplaceText,{\"City/Street - Copy - Copy\"}),",
+                "    #\"Renamed Columns3\" = Table.RenameColumns(#\"Replaced Value16\",{{\"City/Street - Copy - Copy\", \"Country\"}}),",
+                "    #\"Replaced Value17\" = Table.ReplaceValue(#\"Renamed Columns3\",\"100090\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value18\" = Table.ReplaceValue(#\"Replaced Value17\",\"100216\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value19\" = Table.ReplaceValue(#\"Replaced Value18\",\"100146\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value20\" = Table.ReplaceValue(#\"Replaced Value19\",\"100069\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Renamed Columns4\" = Table.RenameColumns(#\"Replaced Value20\",{{\"City/Street - Copy - Copy - Copy\", \"PostalCode\"}}),",
+                "    #\"Replaced Value21\" = Table.ReplaceValue(#\"Renamed Columns4\",\"100041\",\"2520\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value22\" = Table.ReplaceValue(#\"Replaced Value21\",\"100090\",\"94122\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value23\" = Table.ReplaceValue(#\"Replaced Value22\",\"100216\",\"85204\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value24\" = Table.ReplaceValue(#\"Replaced Value23\",\"100146\",\"93010\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value25\" = Table.ReplaceValue(#\"Replaced Value24\",\"100069\",\"68104\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value26\" = Table.ReplaceValue(#\"Replaced Value25\",\"San Francisco, California, United States, 94122\",\"San Francisco California United States 94122\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
+                "    #\"Replaced Value27\" = Table.ReplaceValue(#\"Replaced Value26\",\"Mesa, Arizona, United States, 85204\",\"Mesa Arizona United States 85204\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
+                "    #\"Replaced Value28\" = Table.ReplaceValue(#\"Replaced Value27\",\"Camarillo, California, United States, 93010\",\"Camarillo California United States 93010\",Replacer.ReplaceText,{\"DeliveryAddress\"}),",
+                "    #\"Replaced Value29\" = Table.ReplaceValue(#\"Replaced Value28\",\"100083\",\"Medford\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value30\" = Table.ReplaceValue(#\"Replaced Value29\",\"100153\",\"Norman\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value31\" = Table.ReplaceValue(#\"Replaced Value30\",\"100202\",\"Anaheim\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value32\" = Table.ReplaceValue(#\"Replaced Value31\",\"100048\",\"Mount Vernon\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value33\" = Table.ReplaceValue(#\"Replaced Value32\",\"100055\",\"Laurel\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value34\" = Table.ReplaceValue(#\"Replaced Value33\",\"100209\",\"Portland\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value35\" = Table.ReplaceValue(#\"Replaced Value34\",\"100160\",\"Philadelphia\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value36\" = Table.ReplaceValue(#\"Replaced Value35\",\"100111\",\"New York City\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value37\" = Table.ReplaceValue(#\"Replaced Value36\",\"100097\",\"New York City\",Replacer.ReplaceText,{\"City/Street\"}),",
+                "    #\"Replaced Value38\" = Table.ReplaceValue(#\"Replaced Value37\",\"100097\",\"New York\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value39\" = Table.ReplaceValue(#\"Replaced Value38\",\"100111\",\"New York\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value40\" = Table.ReplaceValue(#\"Replaced Value39\",\"100048\",\"New York\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value41\" = Table.ReplaceValue(#\"Replaced Value40\",\"100160\",\"Pennsylvania\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value42\" = Table.ReplaceValue(#\"Replaced Value41\",\"100209\",\"Oregon\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value43\" = Table.ReplaceValue(#\"Replaced Value42\",\"100055\",\"Maryland\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value44\" = Table.ReplaceValue(#\"Replaced Value43\",\"100202\",\"California\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value45\" = Table.ReplaceValue(#\"Replaced Value44\",\"100153\",\"Oklahoma\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value46\" = Table.ReplaceValue(#\"Replaced Value45\",\"100083\",\"Oregon\",Replacer.ReplaceText,{\"State\"}),",
+                "    #\"Replaced Value47\" = Table.ReplaceValue(#\"Replaced Value46\",\"100083\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value48\" = Table.ReplaceValue(#\"Replaced Value47\",\"100153\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value49\" = Table.ReplaceValue(#\"Replaced Value48\",\"100202\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value50\" = Table.ReplaceValue(#\"Replaced Value49\",\"100048\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value51\" = Table.ReplaceValue(#\"Replaced Value50\",\"100055\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value52\" = Table.ReplaceValue(#\"Replaced Value51\",\"100209\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value53\" = Table.ReplaceValue(#\"Replaced Value52\",\"100160\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value54\" = Table.ReplaceValue(#\"Replaced Value53\",\"100111\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value55\" = Table.ReplaceValue(#\"Replaced Value54\",\"100097\",\"United States\",Replacer.ReplaceText,{\"Country\"}),",
+                "    #\"Replaced Value56\" = Table.ReplaceValue(#\"Replaced Value55\",\"100083\",\"97504\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value57\" = Table.ReplaceValue(#\"Replaced Value56\",\"100153\",\"73071\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value58\" = Table.ReplaceValue(#\"Replaced Value57\",\"100202\",\"92804\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value59\" = Table.ReplaceValue(#\"Replaced Value58\",\"100048\",\"10550\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value60\" = Table.ReplaceValue(#\"Replaced Value59\",\"100055\",\"20707\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value61\" = Table.ReplaceValue(#\"Replaced Value60\",\"100209\",\"97206\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value62\" = Table.ReplaceValue(#\"Replaced Value61\",\"100160\",\"19134\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value63\" = Table.ReplaceValue(#\"Replaced Value62\",\"100111\",\"10035\",Replacer.ReplaceText,{\"PostalCode\"}),",
+                "    #\"Replaced Value64\" = Table.ReplaceValue(#\"Replaced Value63\",\"100097\",\"10009\",Replacer.ReplaceText,{\"PostalCode\"})",
                 "in",
-                "    #\"Replaced Value3\""
+                "    #\"Replaced Value64\""
               ],
               "type": "m"
             }
